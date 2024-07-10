@@ -129,6 +129,11 @@ local SpectacleTelescope = function()
 				sorter = conf.generic_sorter(opts),
 				attach_mappings = function(prompt_bufnr, map)
 					-- load session on enter
+					map("i", "<CR>", function()
+						local selection = action_state.get_selected_entry()
+						actions.close(prompt_bufnr)
+						_load_session(selection.value)
+					end)
 					map("n", "<CR>", function()
 						local selection = action_state.get_selected_entry()
 						actions.close(prompt_bufnr)
